@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\superadmin;
-use Illuminate\Auth\Events\Validated;
+use App\Models\auth;
+use Laravel\Sanctum\HasApiTokens;
 
 class AuthController extends Controller
 {
@@ -43,5 +44,14 @@ class AuthController extends Controller
                 // ];
             };
         }
+    }
+
+    public function logout(Request $request)
+    {
+        // $request->tokens()->delete();
+        $request->user()->currentAccessToken()->delete();
+        return [
+            'message' => 'Logged Out Successfuly',
+        ];
     }
 }
