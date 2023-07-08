@@ -13,6 +13,8 @@ class SuperAdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    // Getting all superAdmin
     public function getAllSuperAdmins()
     {
         //
@@ -25,9 +27,11 @@ class SuperAdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    // Creating a superAdmin
     public function createSuperAdmin(Request $request)
     {
-        //
+
         $fill = $request->validate([
             'first_name' => 'required | string',
             'last_name' => 'required | string',
@@ -56,6 +60,36 @@ class SuperAdminController extends Controller
         $superadmin->save();
     }
 
+    // Getting one superAdmin
+    public function findOneSuperAdmin($id)
+    {
+        $superadmin = superadmin::find($id);
+        return response()->json($superadmin);
+    }
+
+    // editing a superAdmin
+    public function UpdateSuperAdmin($id)
+    {
+        $superadmin = superadmin::find($id)
+            ->filter($id)
+            ->update($id);
+
+        return response([
+            'message' => 'updated successfully',
+            'superadmin' => $superadmin
+        ], 200);
+    }
+
+
+    //  Deleting a superAdmin
+    public function deleteSuperAdmin($id)
+    {
+        superadmin::destroy($id);
+        return response([
+            'message' => 'Admin Deleted Successfully'
+        ], 200);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -65,19 +99,18 @@ class SuperAdminController extends Controller
     public function store(Request $request)
     {
         //
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\superadmin  $superadmin
+     * @param  \App\Models\superadmin  $id
      * @return \Illuminate\Http\Response
      */
-    public function showSingleAdmin(superadmin $superadmin)
+    public function showSingleAdmin(superadmin $id)
     {
         //
-        superadmin::find();
+        // dd(superadmin::find($id));
     }
 
     /**

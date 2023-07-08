@@ -4,7 +4,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdminController;
-use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,13 +17,18 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::post('/createSuperAdmin', [SuperAdminController::class, 'createSuperAdmin']);
 Route::post('/auth', [AuthController::class, 'login']);
+Route::get('/sigleAdmin/{id}', [SuperAdminController::class, 'findOneSuperAdmin']);
+Route::get('/allSuperAdmin', [SuperAdminController::class, 'getAllSuperAdmins']);
+
 
 // Protected Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::get('/allSuperAdmin', [SuperAdminController::class, 'getAllSuperAdmins']);
+    // Login Route
     Route::get('/logout', [AuthController::class, 'logout']);
+
+    // Admin Route
+    Route::post('/createSuperAdmin', [SuperAdminController::class, 'createSuperAdmin']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
