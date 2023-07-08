@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Students;
 use Illuminate\Http\Request;
 use App\Models\superadmin;
-use App\Models\auth;
-use Laravel\Sanctum\HasApiTokens;
+use App\Models\Teachers;
 
 class AuthController extends Controller
 {
@@ -22,27 +22,61 @@ class AuthController extends Controller
 
 
 
-        $superadmin = superadmin::where('adminIndex', $fields['index_number'])
-            ->first();
-        if ($fields) {
-            if (!$superadmin || !$superadmin->password) {
 
+        if ($fields) {
+            if ($superadmin = superadmin::where('adminIndex', $fields['index_number'])->first()) {
+
+                if (!$superadmin || !$superadmin->password) {
+                    return [
+                        'message' => 'Wrong user'
+                    ];
+                } else {
+                    $token = $superadmin->createToken('myResultApp')->plainTextToken;
+
+                    $response = [
+                        'admin' => $superadmin,
+                        'token' => $token
+                    ];
+
+                    return response($response, 200);
+                }
+            } elseif ($teacher = Teachers::where('teacherIndex', $fields['index_number'])->first()) {
+
+                if (!$teacher || !$teacher->password) {
+                    return [
+                        'message' => 'Wrong user'
+                    ];
+                } else {
+                    $token = $teacher->createToken('myResultApp')->plainTextToken;
+
+                    $response = [
+                        'teacher' => $teacher,
+                        'token' => $token
+                    ];
+
+                    return response($response, 200);
+                }
+            } elseif ($student = Students::where('studentIndex', $fields['index_number'])->first()) {
+
+                if (!$student || !$student->password) {
+                    return [
+                        'message' => 'Wrong user'
+                    ];
+                } else {
+                    $token = $student->createToken('myResultApp')->plainTextToken;
+
+                    $response = [
+                        'student' => $student,
+                        'token' => $token
+                    ];
+
+                    return response($response, 200);
+                }
+            } else {
                 return [
                     'message' => 'Wrong user'
                 ];
-            } else {
-                $token = $superadmin->createToken('myResultApp')->plainTextToken;
-
-                $response = [
-                    'admin' => $superadmin,
-                    'token' => $token
-                ];
-
-                return response($response, 200);
-                // return [
-                //     'message' => 'login Successful'
-                // ];
-            };
+            }
         }
     }
 

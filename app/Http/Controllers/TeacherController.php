@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Teaher;
+use App\Models\Teachers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class TeacherController extends Controller
 {
@@ -12,9 +13,11 @@ class TeacherController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function allTeachers()
     {
         //
+        $teachers = Teachers::all();
+        return $teachers;
     }
 
     /**
@@ -22,9 +25,33 @@ class TeacherController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createTeacher(Request $request)
     {
-        //
+        $fill = $request->validate([
+            'first_name' => 'required | string',
+            'last_name' => 'required | string',
+            'email' => 'required | string',
+        ]);
+
+        $start = 'sos';
+        $end = 'teacher';
+        $t_index = $start . $fill['last_name'] . '@' . $end;
+        // $password = bcrypt(Str::random(12) . '@Superadmin');
+        $password = Str::random(12) . '@' . 'teacher';
+        $role = 'teacher';
+
+
+        $teacher = new Teachers();
+        $teacher->teacherIndex = $t_index;
+        $teacher->first_name = $request->input('first_name');
+        $teacher->other_name = $request->input('other_name');
+        $teacher->last_name = $request->input('last_name');
+        $teacher->password = $password;
+        $teacher->email = $request->input('email');
+        $teacher->role = $role;
+        $teacher->number = $request->input('number');
+        $teacher->location = $request->input('location');
+        $teacher->save();
     }
 
     /**
@@ -41,10 +68,10 @@ class TeacherController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Teaher  $teaher
+     * @param  \App\Models\Teachers  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function show(Teaher $teaher)
+    public function show(Teachers $teachers)
     {
         //
     }
@@ -52,10 +79,10 @@ class TeacherController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Teaher  $teaher
+     * @param  \App\Models\Teachers  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function edit(Teaher $teaher)
+    public function edit(Teachers $teachers)
     {
         //
     }
@@ -64,10 +91,10 @@ class TeacherController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Teaher  $teaher
+     * @param  \App\Models\Teachers  $teachers
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Teaher $teaher)
+    public function update(Request $request, Teachers $teachers)
     {
         //
     }
@@ -75,11 +102,12 @@ class TeacherController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Teaher  $teaher
+     * @param  \App\Models\Teachers  $teachers
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Teaher $teaher)
+    public function destroy(Teachers $id)
     {
         //
+        Teachers::destroy($id);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Students;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class StudentsController extends Controller
 {
@@ -12,9 +13,11 @@ class StudentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function allStudents()
     {
         //
+        $students = Students::all();
+        return $students;
     }
 
     /**
@@ -22,9 +25,35 @@ class StudentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createStudents(Request $request)
     {
         //
+        $fill = $request->validate([
+            'first_name' => 'required | string',
+            'last_name' => 'required | string',
+            'guidance' => 'required | string',
+        ]);
+
+        $start = 'sos';
+        $end = 'student';
+        $s_index = $start . $fill['last_name'] . '@' . $end;
+        // $password = bcrypt(Str::random(12) . '@Superadmin');
+        $password = Str::random(12) . '@' . 'student';
+        $role = 'student';
+
+
+        $student = new Students();
+        $student->studentIndex = $s_index;
+        $student->first_name = $request->input('first_name');
+        $student->other_name = $request->input('other_name');
+        $student->last_name = $request->input('last_name');
+        $student->password = $password;
+        $student->role = $role;
+        $student->class = $request->input('class');
+        $student->guidance = $request->input('guidance');
+        $student->guidance_number = $request->input('guidance_number');
+        $student->location = $request->input('location');
+        $student->save();
     }
 
     /**
