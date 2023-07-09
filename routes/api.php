@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssignSubjects;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StudentsController;
 use Illuminate\Http\Request;
@@ -20,6 +21,9 @@ use App\Http\Controllers\TeacherController;
 // Public Route
 Route::post('/auth', [AuthController::class, 'login']);
 
+Route::post('/assignSubject/{TeacherIndex}/assign', [AssignSubjects::class, 'assignSubject']);
+
+Route::post('/createStudents', [StudentsController::class, 'createStudents']);
 
 
 // Protected Routes
@@ -32,13 +36,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/allSuperAdmin', [SuperAdminController::class, 'getAllSuperAdmins']);
     Route::post('/createSuperAdmin', [SuperAdminController::class, 'createSuperAdmin']);
 
+
     // Teachers Routes
     Route::get('/allTeachers', [TeacherController::class, 'allTeachers']);
     Route::post('/createTeachers', [TeacherController::class, 'createTeacher']);
 
     // Students Routes
     Route::get('/getAllStudents', [StudentsController::class, 'allStudents']);
-    Route::post('/createStudent', [StudentsController::class, 'createStudents']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

@@ -21,7 +21,8 @@ class CreateTeachersTable extends Migration
             $table->string('last_name');
             $table->string('password');
             $table->string('email')->unique();
-            $table->string('role');
+            $table->boolean('asSubjectTeacher');
+            $table->boolean('asClassTeacher');
             $table->string('number');
             $table->string('location');
             $table->timestamps();

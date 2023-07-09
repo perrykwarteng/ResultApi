@@ -41,7 +41,6 @@ class AuthController extends Controller
                     return response($response, 200);
                 }
             } elseif ($teacher = Teachers::where('teacherIndex', $fields['index_number'])->first()) {
-
                 if (!$teacher || !$teacher->password) {
                     return [
                         'message' => 'Wrong user'

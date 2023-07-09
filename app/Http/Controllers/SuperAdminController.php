@@ -36,7 +36,6 @@ class SuperAdminController extends Controller
             'first_name' => 'required | string',
             'last_name' => 'required | string',
             'email' => 'required | string',
-            'role' => 'required | string'
         ]);
 
         $start = 'sos';

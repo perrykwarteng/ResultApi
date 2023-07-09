@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Teacher;
 use App\Models\Teachers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -38,7 +39,7 @@ class TeacherController extends Controller
         $t_index = $start . $fill['last_name'] . '@' . $end;
         // $password = bcrypt(Str::random(12) . '@Superadmin');
         $password = Str::random(12) . '@' . 'teacher';
-        $role = 'teacher';
+
 
 
         $teacher = new Teachers();
@@ -48,7 +49,8 @@ class TeacherController extends Controller
         $teacher->last_name = $request->input('last_name');
         $teacher->password = $password;
         $teacher->email = $request->input('email');
-        $teacher->role = $role;
+        $teacher->asSubjectTeacher = $request->input('asSubjectTeacher');
+        $teacher->asClassTeacher = $request->input('asClassTeacher');
         $teacher->number = $request->input('number');
         $teacher->location = $request->input('location');
         $teacher->save();

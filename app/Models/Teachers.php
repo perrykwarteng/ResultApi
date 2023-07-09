@@ -22,4 +22,9 @@ class Teachers extends Authenticatable
         'number',
         'location',
     ];
+
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class);
+    }
 }
