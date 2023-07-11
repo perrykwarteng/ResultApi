@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AssignSubjects;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClassController;
 use App\Http\Controllers\StudentsController;
+use App\Http\Controllers\SubjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdminController;
@@ -23,7 +25,8 @@ Route::post('/auth', [AuthController::class, 'login']);
 
 Route::post('/assignSubject/{TeacherIndex}/assign', [AssignSubjects::class, 'assignSubject']);
 
-Route::post('/createStudents', [StudentsController::class, 'createStudents']);
+
+
 
 
 // Protected Routes
@@ -43,6 +46,17 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     // Students Routes
     Route::get('/getAllStudents', [StudentsController::class, 'allStudents']);
+    Route::post('/createStudents', [StudentsController::class, 'createStudents']);
+
+    //Subject Routes
+    Route::get('/allSubject', [SubjectController::class, 'getSubjects']);
+    Route::post('/createSubject', [SubjectController::class, 'createSubject']);
+    Route::delete('/deleteSubject', [SubjectController::class, 'destroySubject']);
+
+    // Class Route
+    Route::get('/allClass', [ClassController::class, 'getClass']);
+    Route::post('/createClass', [ClassController::class, 'createClass']);
+    Route::delete('/deleteClass', [ClassController::class, 'destroyClass']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

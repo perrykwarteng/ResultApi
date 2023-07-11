@@ -10,8 +10,8 @@ class Subjects extends Model
     use HasFactory;
 
     protected $fillable = [
-        'subjectId',
-        'subject_name'
+        'subjectCode',
+        'subjectName'
     ];
 
     public function teachers()

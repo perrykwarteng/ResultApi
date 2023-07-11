@@ -12,7 +12,7 @@ class SubjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getSubjects()
     {
         //
         $subject = Subjects::get();
@@ -24,9 +24,16 @@ class SubjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createSubject(Request $request)
     {
         //
+
+
+
+        $subject = new Subjects();
+        $subject->subjectCode = $request->input('subjectCode');
+        $subject->subjectName = $request->input('subjectName');
+        $subject->save();
     }
 
     /**
@@ -82,9 +89,10 @@ class SubjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroySubject($id)
     {
         //
-        Subjects::destroy($id);
+        $subject = Subjects::destroy($id);
+        return $subject;
     }
 }

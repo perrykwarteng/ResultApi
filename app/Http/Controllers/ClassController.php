@@ -12,7 +12,7 @@ class ClassController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function allClass()
     {
         //
         $class = Classes::all();
@@ -24,9 +24,13 @@ class ClassController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createClass(Request $request)
     {
         //
+        $class = new Classes();
+        $class->classCode = $request->input('classCode');
+        $class->className = $request->input('className');
+        $class->save();
     }
 
     /**
@@ -82,7 +86,7 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroyClass($id)
     {
         //
         Classes::destroy($id);
