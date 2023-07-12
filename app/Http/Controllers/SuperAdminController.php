@@ -59,6 +59,15 @@ class SuperAdminController extends Controller
         $superadmin->save();
     }
 
+    public function getSuperAdmin(Request $request)
+    {
+        $superadmin = $request->user();
+
+        return response()->json([
+            'superAdmin' => $superadmin
+        ]);
+    }
+
     // Getting one superAdmin
     public function findOneSuperAdmin($id)
     {

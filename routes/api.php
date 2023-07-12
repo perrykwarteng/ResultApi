@@ -27,6 +27,7 @@ Route::post('/assignSubject/{TeacherIndex}/assign', [AssignSubjects::class, 'ass
 
 
 
+Route::post('/createSuperAdmin', [SuperAdminController::class, 'createSuperAdmin']);
 
 
 // Protected Routes
@@ -37,7 +38,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // Admin Routes
     Route::get('/sigleAdmin/{id}', [SuperAdminController::class, 'findOneSuperAdmin']);
     Route::get('/allSuperAdmin', [SuperAdminController::class, 'getAllSuperAdmins']);
-    Route::post('/createSuperAdmin', [SuperAdminController::class, 'createSuperAdmin']);
+    Route::get('/getSuperAdmin', [SuperAdminController::class, 'getSuperAdmin']);
+    // Route::post('/createSuperAdmin', [SuperAdminController::class, 'createSuperAdmin']);
 
 
     // Teachers Routes
