@@ -31,7 +31,7 @@ class AuthController extends Controller
                         'message' => 'Wrong user'
                     ];
                 } else {
-                    $token = $superadmin->createToken('myResultApp')->plainTextToken;
+                    $token = $superadmin->createToken('')->plainTextToken;
 
                     $response = [
                         'admin' => $superadmin,

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssignClassController;
 use App\Http\Controllers\AssignSubjects;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassController;
@@ -9,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\TeacherController;
+use App\Models\AssignClass;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,11 +25,18 @@ use App\Http\Controllers\TeacherController;
 // Public Route
 Route::post('/auth', [AuthController::class, 'login']);
 
-Route::post('/assignSubject/{TeacherIndex}/assign', [AssignSubjects::class, 'assignSubject']);
+// Route::post('/assignSubject/{TeacherIndex}/assign', [AssignSubjects::class, 'assignSubject']);
 
 
+// Route::post('/createSuperAdmin', [SuperAdminController::class, 'createSuperAdmin']);
 
-Route::post('/createSuperAdmin', [SuperAdminController::class, 'createSuperAdmin']);
+// Route::post('/createTeachers', [TeacherController::class, 'createTeacher']);
+// Route::post('/createClass', [ClassController::class, 'createClass']);
+
+// Route::post('/createStudents', [StudentsController::class, 'createStudents']);
+
+// Route::get('studentClass/{teacherIndex}', [AssignClassController::class, 'getClassStudents']);
+
 
 
 // Protected Routes
@@ -56,9 +65,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::delete('/deleteSubject', [SubjectController::class, 'destroySubject']);
 
     // Class Route
-    Route::get('/allClass', [ClassController::class, 'getClass']);
+    Route::get('/allClass', [ClassController::class, 'allClass']);
     Route::post('/createClass', [ClassController::class, 'createClass']);
     Route::delete('/deleteClass', [ClassController::class, 'destroyClass']);
+
+    // Assign Class to teacher
+    Route::post('/classAssign', [AssignClassController::class, 'AssignClass']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

@@ -13,19 +13,19 @@ class CreateSuperadminsTable extends Migration
      */
     public function up()
     {
-        Schema::create('superadmins', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('adminIndex')->unique();
-            $table->string('first_name');
-            $table->string('other_name');
-            $table->string('last_name');
-            $table->string('password');
-            $table->string('email')->unique();
-            $table->string('role');
-            $table->string('number');
-            $table->string('location');
-            $table->timestamps();
-        });
+        // Schema::create('superadmins', function (Blueprint $table) {
+        //     $table->increments('id');
+        //     $table->string('adminIndex')->unique();
+        //     $table->string('first_name');
+        //     $table->string('other_name');
+        //     $table->string('last_name');
+        //     $table->string('password');
+        //     $table->string('email')->unique();
+        //     $table->string('role');
+        //     $table->string('number');
+        //     $table->string('location');
+        //     $table->timestamps();
+        // });
     }
 
     /**
@@ -35,6 +35,6 @@ class CreateSuperadminsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('superadmin');
+        // Schema::dropIfExists('superadmin');
     }
 }
