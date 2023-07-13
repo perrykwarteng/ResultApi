@@ -13,12 +13,12 @@ class CreateClassTeacherTable extends Migration
      */
     public function up()
     {
-        Schema::create('class_teacher', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('teacher')->constrained("teachers",'teacherIndex');
-            $table->foreignId('classCode')->constrained("classes","classCode");
-            $table->timestamps();
-        });
+        // Schema::create('class_teacher', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->foreignId('teacher')->constrained("teachers",'teacherIndex');
+        //     $table->foreignId('classCode')->constrained("classes","classCode");
+        //     $table->timestamps();
+        // });
     }
 
     /**

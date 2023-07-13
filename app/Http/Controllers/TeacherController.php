@@ -56,6 +56,15 @@ class TeacherController extends Controller
         $teacher->save();
     }
 
+    public function getTeacher(Request $request)
+    {
+        $teacher = $request->user();
+
+        return response()->json([
+            'teacher' => $teacher
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

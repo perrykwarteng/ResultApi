@@ -13,20 +13,20 @@ class CreateTeachersTable extends Migration
      */
     public function up()
     {
-        Schema::create('teachers', function (Blueprint $table) {
-            $table->integer('id')->autoIncrement();
-            $table->string('teacherIndex')->unique()->index("teacher_index");
-            $table->string('first_name');
-            $table->string('other_name');
-            $table->string('last_name');
-            $table->string('password');
-            $table->string('email')->unique();
-            $table->boolean('asSubjectTeacher');
-            $table->boolean('asClassTeacher');
-            $table->string('number');
-            $table->string('location');
-            $table->timestamps();
-        });
+        // Schema::create('teachers', function (Blueprint $table) {
+        //     $table->integer('id')->autoIncrement();
+        //     $table->string('teacherIndex')->unique()->index("teacher_index");
+        //     $table->string('first_name');
+        //     $table->string('other_name');
+        //     $table->string('last_name');
+        //     $table->string('password');
+        //     $table->string('email')->unique();
+        //     $table->boolean('asSubjectTeacher');
+        //     $table->boolean('asClassTeacher');
+        //     $table->string('number');
+        //     $table->string('location');
+        //     $table->timestamps();
+        // });
     }
 
     /**

@@ -13,20 +13,20 @@ class CreateStudentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('students', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('studentIndex')->unique();
-            $table->string('first_name');
-            $table->string('other_name');
-            $table->string('last_name');
-            $table->string('password');
-            $table->string('role');
-            $table->string('class');
-            $table->string('guidance');
-            $table->string('guidance_number');
-            $table->string('location');
-            $table->timestamps();
-        });
+    //     Schema::create('students', function (Blueprint $table) {
+    //         $table->increments('id');
+    //         $table->string('studentIndex')->unique();
+    //         $table->string('first_name');
+    //         $table->string('other_name');
+    //         $table->string('last_name');
+    //         $table->string('password');
+    //         $table->string('role');
+    //         $table->string('class');
+    //         $table->string('guidance');
+    //         $table->string('guidance_number');
+    //         $table->string('location');
+    //         $table->timestamps();
+    //     });
     }
 
     /**
@@ -36,6 +36,6 @@ class CreateStudentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('students');
+        // Schema::dropIfExists('students');
     }
 }

@@ -13,12 +13,12 @@ class CreateClassesTable extends Migration
      */
     public function up()
     {
-        Schema::create('classes', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('classCode')->unique()->index("class_code");
-            $table->string('className');
-            $table->timestamps();
-        });
+        // Schema::create('classes', function (Blueprint $table) {
+        //     $table->increments('id');
+        //     $table->string('classCode')->unique()->index("class_code");
+        //     $table->string('className');
+        //     $table->timestamps();
+        // });
     }
 
     /**
@@ -28,6 +28,6 @@ class CreateClassesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('classes');
+        // Schema::dropIfExists('classes');
     }
 }
